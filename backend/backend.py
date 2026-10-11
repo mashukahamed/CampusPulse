@@ -8,7 +8,7 @@ import pandas as pd
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "data"
+DATA_DIR = BASE_DIR / "Data"
 
 app = Flask(__name__)
 
