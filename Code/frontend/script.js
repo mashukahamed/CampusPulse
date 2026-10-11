@@ -1120,7 +1120,7 @@ async function sendAssistantPrompt(question) {
 
   try {
     const response = await fetch(
-      "http://127.0.0.1:5000/api/ai-chat",
+      https:"https://campuspulse-backend-phe9.onrender.com"/api/ai-chat",
       {
         method: "POST",
         headers: {
@@ -1294,7 +1294,7 @@ async function initialiseApp() {
 
   try {
     const response = await fetch(
-      "http://127.0.0.1:5000/api/students"
+      https:"https://campuspulse-backend-phe9.onrender.com"/api/students"
     );
 
     if (!response.ok) {
@@ -1352,7 +1352,7 @@ async function initialiseApp() {
 
 initialiseApp();
 
-fetch("http://127.0.0.1:5000/api/students")
+fetch("https://campuspulse-backend-phe9.onrender.com"/api/students")
   .then(response => {
     if (!response.ok) {
       throw new Error("Failed to fetch student data");
