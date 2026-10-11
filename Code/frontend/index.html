@@ -1,0 +1,402 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="CampusPulse helps educators review academic progress, engagement, and placement readiness."
+  >
+  <title>CampusPulse | Student Success Intelligence</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="CampusPulse home">
+        <span class="brand-mark">✳</span>
+        <span>
+          <strong>CampusPulse</strong>
+          <small>STUDENT SUCCESS INTELLIGENCE</small>
+        </span>
+      </a>
+
+      <div class="nav-section">
+        <p class="nav-heading">WORKSPACE</p>
+        <nav class="navigation" aria-label="Main navigation">
+          <button class="nav-link active" data-page="overview">◫ <span>Overview</span></button>
+          <button class="nav-link" data-page="students">♙ <span>Student Analytics</span></button>
+          <button class="nav-link" data-page="insights">⌁ <span>Risk Insights</span></button>
+          <button class="nav-link" data-page="recommendations">✧ <span>Recommendations</span></button>
+          <button class="nav-link" data-page="assistant">✳ <span>AI Assistant</span></button>
+          <button class="nav-link student-only" data-page="myprogress" hidden>♙ <span>My Progress</span></button>
+          <button class="nav-link" data-page="about">ⓘ <span>About CampusPulse</span></button>
+        </nav>
+      </div>
+
+      <div class="sidebar-note">
+        <strong>Small signals. Better support.</strong>
+        <p>Bring student indicators together to help educators identify where support may be useful.</p>
+        <span class="status-pill">● Prototype workspace</span>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-button mobile-menu" id="mobileMenu" aria-label="Toggle navigation">☰</button>
+          <p>Workspace / <strong id="breadcrumb">Overview</strong></p>
+        </div>
+        <div class="topbar-right">
+          <span class="demo-badge">DEMO DATA · SYNTHETIC</span>
+          <span class="avatar">CP</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="role-bar">
+          <div>
+            <strong id="roleTitle">Faculty workspace</strong>
+            <p id="roleDescription">Review class-level patterns and identify opportunities for student support.</p>
+          </div>
+          <button class="button button-secondary" id="roleSwitch">Switch to student view →</button>
+        </section>
+
+        <section class="page active" id="page-overview">
+          <div class="page-header">
+            <div>
+              <span class="eyebrow">CAMPUS SNAPSHOT</span>
+              <h1>Student success, in focus.</h1>
+              <p>A clearer view of academic progress, engagement and placement readiness.</p>
+            </div>
+            <button class="button button-primary" data-go="students">Explore students ↗</button>
+          </div>
+
+          <section class="hero">
+            <div class="hero-copy">
+              <span class="eyebrow">CAMPUSPULSE OVERVIEW</span>
+              <h2>Turn campus data into more timely student support.</h2>
+              <p>Bring academic, attendance, learning activity and placement indicators into one view so educators can decide where a human check-in may help.</p>
+              <button class="button button-primary" data-go="insights">View risk insights →</button>
+            </div>
+            <div class="hero-score">
+              <div class="score-ring"><strong>78%</strong><span>SUCCESS INDEX</span></div>
+              <small>Illustrative overall indicator</small>
+            </div>
+          </section>
+
+          <div class="metrics-grid">
+            <article class="metric-card">
+              <span class="metric-label">Students in sample</span>
+              <strong class="metric-value">1,248</strong>
+              <small class="metric-foot">↑ 4.8% vs. previous term</small>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Academic support flags</span>
+              <strong class="metric-value">86</strong>
+              <small class="metric-foot">6.9% of sample · illustrative</small>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Placement support flags</span>
+              <strong class="metric-value">214</strong>
+              <small class="metric-foot">17.1% of sample · illustrative</small>
+            </article>
+            <article class="metric-card">
+              <span class="metric-label">Average attendance</span>
+              <strong class="metric-value">82.4%</strong>
+              <small class="metric-foot">↑ 2.1 points · illustrative</small>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="card">
+              <div class="card-header">
+                <div>
+                  <h2>Performance by department</h2>
+                  <p>Illustrative average scores · 0–100</p>
+                </div>
+                <select id="chartMetric" aria-label="Select chart metric">
+                  <option value="success">Success index</option>
+                  <option value="academic">Academic</option>
+                  <option value="attendance">Attendance</option>
+                  <option value="placement">Placement readiness</option>
+                </select>
+              </div>
+              <div class="chart-legend">
+                <span><i class="legend-dot current"></i>Current</span>
+                <span><i class="legend-dot previous"></i>Previous</span>
+              </div>
+              <div class="bar-chart" id="departmentChart" aria-label="Department score chart"></div>
+              <div class="chart-labels" id="departmentLabels"></div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <div>
+                  <h2>Student support overview</h2>
+                  <p>Illustrative distribution by signal</p>
+                </div>
+              </div>
+              <div class="support-overview">
+                
+<div class="donut-chart">
+  <div>
+    <strong id="supportTotal">100</strong>
+    <span>STUDENTS</span>
+  </div>
+</div>
+
+<div class="support-legend">
+  <span><i class="legend-dot purple"></i>On track <strong id="onTrackCount">0</strong></span>
+  <span><i class="legend-dot green"></i>Monitor <strong id="monitorCount">0</strong></span>
+  <span><i class="legend-dot orange"></i>Academic <strong id="academicCount">0</strong></span>
+  <span><i class="legend-dot red"></i>Placement <strong id="placementCount">0</strong></span>
+</div>
+              </div>
+            </article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="card">
+              <div class="card-header">
+                <div>
+                  <h2>Students to check in with</h2>
+                  <p>Example records for demonstrating the workflow</p>
+                </div>
+                <button class="button button-secondary" data-go="students">View all →</button>
+              </div>
+              <div class="table-container">
+                <table>
+                  <thead>
+                    <tr><th>STUDENT</th><th>DEPARTMENT</th><th>SCORE</th><th>STATUS</th></tr>
+                  </thead>
+                  <tbody id="overviewStudents"></tbody>
+                </table>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <div>
+                  <h2>Signals worth noticing</h2>
+                  <p>Patterns that may warrant a conversation</p>
+                </div>
+              </div>
+              <div class="signal-list">
+                <div class="signal-item"><span class="signal-icon">◷</span><div><strong>Attendance below target</strong><p>Review attendance trends alongside context.</p></div><b id="attendanceSignalCount">0</b></div>
+                <div class="signal-item"><span class="signal-icon">↘</span><div><strong>Assessment decline</strong><p>Offer a faculty check-in if needed.</p></div><b id="assessmentDeclineCount">0</b></div>
+                <div class="signal-item"><span class="signal-icon">↗</span><div><strong>Placement practice gap</strong><p>Consider coding and aptitude practice.</p></div><b id="placementGapCount">0</b></div>
+              </div>
+            </article>
+          </div>
+
+          <div class="notice">
+            <strong>✳ CampusPulse insight</strong>
+            <p>Review attendance, recent marks and placement practice together instead of treating any one score as a complete picture. Verify records and use human judgment before deciding on support.</p>
+            <button class="button button-secondary" data-go="assistant">Ask AI Assistant →</button>
+          </div>
+        </section>
+
+        <section class="page" id="page-students">
+          <div class="page-header">
+            <div>
+              <span class="eyebrow">STUDENT DATA EXPLORER</span>
+              <h1>Student analytics</h1>
+              <p>Explore a fictional sample across academic performance, attendance and readiness.</p>
+            </div>
+            <button class="button button-secondary" id="resetFilters">Reset filters</button>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card"><span class="metric-label">Matching records</span><strong class="metric-value" id="matchCount">8</strong></article>
+            <article class="metric-card"><span class="metric-label">Average success index</span><strong class="metric-value" id="averageSuccess">73.5</strong></article>
+            <article class="metric-card"><span class="metric-label">Academic flags</span><strong class="metric-value" id="academicFlags">3</strong></article>
+            <article class="metric-card"><span class="metric-label">Placement flags</span><strong class="metric-value" id="placementFlags">3</strong></article>
+          </div>
+
+          <div class="filters">
+            <input type="search" id="studentSearch" placeholder="Search by roll number or name..." aria-label="Search students">
+            <select id="departmentFilter" aria-label="Filter by department">
+              <option value="all">All departments</option>
+              <option>DS</option>
+              <option>CSE</option>
+              <option>EEE</option>
+              <option>IT</option>
+            </select>
+            <select id="statusFilter" aria-label="Filter by status">
+              <option value="all">All statuses</option>
+              <option>On track</option>
+              <option>Monitor</option>
+              <option>Academic support</option>
+              <option>Placement support</option>
+            </select>
+          </div>
+
+          <article class="card">
+            <div class="card-header">
+              <div><h2>Student directory</h2><p>Select a student to view the example profile.</p></div>
+              <span class="demo-badge">SYNTHETIC RECORDS</span>
+            </div>
+            <div class="table-container">
+              <table>
+                <thead><tr><th>STUDENT</th><th>DEPARTMENT</th><th>CGPA</th><th>ATTENDANCE</th><th>ENGAGEMENT</th><th>PLACEMENT</th><th>SUCCESS</th><th>STATUS</th></tr></thead>
+                <tbody id="studentRows"></tbody>
+              </table>
+            </div>
+            <p class="table-foot" id="tableFoot">Showing sample records.</p>
+          </article>
+          <article class="card profile-card" id="studentProfile" hidden></article>
+        </section>
+
+        <section class="page" id="page-insights">
+          <div class="page-header">
+            <div><span class="eyebrow">EARLY SUPPORT INDICATORS</span><h1>Risk insights</h1><p>Example rules can help prioritize review—not predict a student's future with certainty.</p></div>
+          </div>
+          <div class="dashboard-grid">
+            <article class="card">
+              <div class="card-header"><div><h2>Signals detected in sample</h2><p>Illustrative counts, not validated predictions</p></div></div>
+              <div class="signal-list">
+                <div class="signal-item"><span class="signal-icon">◷</span><div><strong>Attendance needs review</strong><p>Example rule: attendance below 75%. Check records and context.</p></div><b id="riskAttendanceCount">0</b></div>
+                <div class="signal-item"><span class="signal-icon">▤</span><div><strong>Academic performance</strong><p>Review internal marks, backlogs or a recent score decline.</p></div><b id="riskAcademicCount">0</b></div>
+                <div class="signal-item"><span class="signal-icon">↗</span><div><strong>Placement practice</strong><p>Low practice scores may point to useful learning resources.</p></div><b id="riskPlacementCount">0</b></div>
+                <div class="signal-item"><span class="signal-icon">⌁</span><div><strong>Engagement changed</strong><p>Review LMS activity alongside access barriers.</p></div><b id="riskEngagementCount">0</b></div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-header"><div><h2>Responsible review workflow</h2><p>Before taking action</p></div></div>
+              <div class="step-list">
+                <p><strong>01 · Check the data</strong><br>Confirm records are recent and correctly matched.</p>
+                <p><strong>02 · Review context</strong><br>A single score is not a complete picture.</p>
+                <p><strong>03 · Talk to the student</strong><br>Ask what support would actually help.</p>
+                <p><strong>04 · Track outcomes</strong><br>Review whether the support was useful.</p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" id="page-recommendations">
+          <div class="page-header">
+            <div><span class="eyebrow">SUPPORT PLAYBOOK</span><h1>Recommendations</h1><p>Turn an observed signal into a practical, supportive next step.</p></div>
+          </div>
+          <div class="recommendation-list">
+            <article class="recommendation"><div><h2>Academic catch-up session</h2><p>Offer subject-wise office hours, revision material and a follow-up check.</p></div><button class="button button-primary" data-toast="Academic support action added to the demo workflow.">Plan support</button></article>
+            <article class="recommendation"><div><h2>Attendance conversation</h2><p>Verify the record, ask about barriers and share available campus support.</p></div><button class="button button-primary" data-toast="Attendance check-in added to the demo workflow.">Plan check-in</button></article>
+            <article class="recommendation"><div><h2>Placement readiness sprint</h2><p>Provide aptitude exercises, coding practice, mock interviews and a weekly review.</p></div><button class="button button-primary" data-toast="Placement preparation plan added to the demo workflow.">Create plan</button></article>
+            <article class="recommendation"><div><h2>Learning engagement support</h2><p>Check whether students can access the learning platform and understand assignments.</p></div><button class="button button-primary" data-toast="Learning engagement check-in added to the demo workflow.">Review signal</button></article>
+          </div>
+          
+  <div class="card">
+  <h2>Saved Recommendations</h2>
+  <p>Track the support actions you've selected.</p>
+  <div id="savedRecommendations">
+    <p>No saved recommendations yet. Choose an action above to get started.</p>
+  </div>
+    </div>
+        </section>
+
+        <section class="page" id="page-assistant">
+          <div class="page-header">
+            <div><span class="eyebrow">CAMPUSPULSE COPILOT</span><h1>AI Assistant</h1><p>Explore student-support questions in a safe demo interface.</p></div>
+            <span class="demo-badge">DEMO ONLY</span>
+          </div>
+          <div class="assistant-grid">
+            <article class="card chat-card">
+              <div class="card-header"><div><h2>Ask CampusPulse</h2><p>Prototype responses are static demo guidance.</p></div></div>
+              <div class="chat-messages" id="chatMessages" aria-live="polite">
+                <div class="chat-message">Hi! Ask me about attendance, academic progress or placement readiness. Responses are illustrative; no AI model is connected.</div>
+              </div>
+              <form class="chat-form" id="assistantForm">
+                <input id="assistantInput" placeholder="Ask about student support..." aria-label="Ask CampusPulse" autocomplete="off">
+                <button class="button button-primary" type="submit">Send ↗</button>
+              </form>
+              <p class="muted-note">Do not enter real student personal information in this prototype.</p>
+            </article>
+            <article class="card">
+              <div class="card-header"><div><h2>Try a question</h2><p>Choose an example prompt</p></div></div>
+              <div class="prompt-list">
+                <button class="prompt-button" data-prompt="What should we check when attendance is low?">Attendance review →</button>
+                <button class="prompt-button" data-prompt="How can faculty review a decline in internal marks?">Academic support →</button>
+                <button class="prompt-button" data-prompt="Suggest a supportive plan for coding practice gaps.">Placement readiness →</button>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page" id="page-myprogress">
+          <div class="page-header">
+            <div><span class="eyebrow">MY PRIVATE LEARNING SPACE</span><h1>Your progress, one step at a time.</h1>
+              <p>Selected student: <strong id="mySelectedStudent">None selected</strong></p>
+              <p>Example indicators and practical next steps for a fictional student.</p></div>
+          </div>
+          <div class="hero">
+            <div class="hero-copy"><span class="eyebrow">YOUR CHECK-IN</span><h2>Build on your strengths.</h2><p>These example indicators are conversation starters, not judgments. Choose a manageable next action and ask for help when needed.</p></div>
+          </div>
+          
+<div class="card">
+  <label for="myProgressStudent">Select student record</label>
+  <select id="myProgressStudent">
+    <option value="">Loading student records...</option>
+  </select>
+</div>
+
+<div class="metrics-grid">
+  <article class="metric-card">
+    <span class="metric-label">Academic indicator</span>
+    <strong class="metric-value" id="myAcademic">—</strong>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Attendance</span>
+    <strong class="metric-value" id="myAttendance">—</strong>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Learning activity</span>
+    <strong class="metric-value" id="myEngagement">—</strong>
+  </article>
+  <article class="metric-card">
+    <span class="metric-label">Placement practice</span>
+    <strong class="metric-value" id="myPlacement">—</strong>
+  </article>
+</div>
+
+<article class="card">
+  <h2>Your next steps</h2>
+  <div class="step-list" id="myNextSteps">
+    <p>Select a student record to view progress and suggested actions.</p>
+  </div>
+</article>
+          <article class="card">
+            <h2>Your next steps</h2>
+            <div class="step-list">
+              <p><strong>01 · Keep academic work steady</strong><br>Revise one difficult topic for 25 minutes and ask a faculty member if needed.</p>
+              <p><strong>02 · Practise placement skills</strong><br>Try two coding or aptitude questions this week and review what you learned.</p>
+              <p><strong>03 · Ask for support</strong><br>Talk to your mentor if attendance or assignment completion is difficult.</p>
+            </div>
+          </article>
+        </section>
+
+        <section class="page" id="page-about">
+          <div class="page-header">
+            <div><span class="eyebrow">THE PROJECT</span><h1>About CampusPulse</h1><p>Smart Campus Analytics: Predict, Optimize &amp; Improve Student Success.</p></div>
+          </div>
+          <section class="hero">
+            <div class="hero-copy"><span class="eyebrow">THE IDEA</span><h2>Help campuses notice support needs sooner.</h2><p>CampusPulse brings multiple student indicators into a single view so faculty and placement teams can understand patterns and coordinate timely support.</p></div>
+          </section>
+          <div class="feature-grid">
+            <article class="card"><span class="feature-icon">▤</span><h2>Academic progress</h2><p>Review CGPA, internal assessment trends and backlogs together.</p></article>
+            <article class="card"><span class="feature-icon">◷</span><h2>Engagement signals</h2><p>Bring attendance, learning platform activity and assignment completion into the same view.</p></article>
+            <article class="card"><span class="feature-icon">↗</span><h2>Placement readiness</h2><p>Identify where aptitude, coding or interview practice resources may help.</p></article>
+          </div>
+        </section>
+
+        <footer class="footer-note">
+          CampusPulse is currently a frontend prototype. All displayed records and statistics are fictional. It is not yet connected to college systems, CSV files or a live AI model.
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
