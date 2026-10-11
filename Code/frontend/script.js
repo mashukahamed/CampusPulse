@@ -1120,7 +1120,7 @@ async function sendAssistantPrompt(question) {
 
   try {
     const response = await fetch(
-      https:"https://campuspulse-backend-phe9.onrender.com"api/ai-chat",
+     "https://campuspulse-backend-phe9.onrender.com/api/ai-chat",
       {
         method: "POST",
         headers: {
