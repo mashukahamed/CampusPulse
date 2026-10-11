@@ -1294,7 +1294,7 @@ async function initialiseApp() {
 
   try {
     const response = await fetch(
-      https:"https://campuspulse-backend-phe9.onrender.com"/api/students"
+      "https://campuspulse-backend-phe9.onrender.com/api/students"
     );
 
     if (!response.ok) {
