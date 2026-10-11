@@ -1352,7 +1352,7 @@ async function initialiseApp() {
 
 initialiseApp();
 
-fetch("https://campuspulse-backend-phe9.onrender.com"/api/students")
+fetch("https://campuspulse-backend-phe9.onrender.com/api/students")
   .then(response => {
     if (!response.ok) {
       throw new Error("Failed to fetch student data");
